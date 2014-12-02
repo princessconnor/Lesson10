@@ -94,21 +94,33 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Generate"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btngenerateActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnbubble">
       <Properties>
         <Property name="text" type="java.lang.String" value="Bubble"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnbubbleActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnselection">
       <Properties>
         <Property name="text" type="java.lang.String" value="Selection"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnselectionActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btninsertion">
       <Properties>
         <Property name="text" type="java.lang.String" value="Insertion"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btninsertionActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>

@@ -1,5 +1,6 @@
 
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -17,11 +18,11 @@ DefaultListModel model;
     /**
      * Creates new form Sorting
      */
+int nums[] = new int [50000];
     public Sorting() {
         initComponents();
         model = new DefaultListModel();
-        model.addElement("Apple");
-         model.addElement("Banana");
+       
          lstsort.setModel(model);
     }
 
@@ -47,12 +48,32 @@ DefaultListModel model;
         jScrollPane1.setViewportView(lstsort);
 
         btngenerate.setText("Generate");
+        btngenerate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btngenerateActionPerformed(evt);
+            }
+        });
 
         btnbubble.setText("Bubble");
+        btnbubble.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnbubbleActionPerformed(evt);
+            }
+        });
 
         btnselection.setText("Selection");
+        btnselection.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnselectionActionPerformed(evt);
+            }
+        });
 
         btninsertion.setText("Insertion");
+        btninsertion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btninsertionActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Sorting Methods");
 
@@ -100,7 +121,120 @@ DefaultListModel model;
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+public static void bubbleSort(int[] a){
+   	int k = 0;
+   	boolean exchangeMade = true;
+	// Make up to n - 1 passes through array, exit 
+	//early if no exchanges are made on previous pass
+  
+ 	while ((k < a.length - 1) && exchangeMade){
+      		exchangeMade = false;
+      		k++;
+      		for (int j = 0; j < a.length - k; j++)  
+         		if (a[j] > a[j + 1]){
+            			swap(a, j, j + 1);		 
+            			exchangeMade = true;
+         		}//end if
+		}//end for
+	}//end while
 
+
+//supporting swap method
+
+public static void swap(int[] a, int x, int y){
+   int temp = a[x];
+   a[x] = a[y];
+   a[y] = temp;
+}
+    private void btngenerateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btngenerateActionPerformed
+        // TODO add your handling code here:
+        for(int x=0; x<nums.length; x++)
+        {
+            nums[x]=(int) ((Math.random()*100000) +1);
+            model.addElement(nums[x]);
+        }
+    }//GEN-LAST:event_btngenerateActionPerformed
+public static void selectionSort(int[] a){
+   for (int i = 0; i < a.length - 1; i++){
+      int minIndex = findMinimum(a, i);
+      if (minIndex != i)
+	//if lowest is not already in place
+         swap(a, i, minIndex);
+   } //end for
+}  
+
+//supporting findMinimum method
+
+public static int findMinimum(int[] a, int first){
+   //first=where to start looking from
+   //assume first is also the smallest for now
+   int minIndex = first; 
+   for (int i = first + 1; i < a.length; i++)
+      if (a[i] < a[minIndex])
+         minIndex = i;
+   return minIndex;
+}
+    private void btnbubbleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbubbleActionPerformed
+        // TODO add your handling code here:
+        model.clear();
+        long stime = System.nanoTime();
+        bubbleSort(nums);
+        long etime = System.nanoTime() -stime/100000;
+        JOptionPane.showMessageDialog(this, "time it took" + etime);
+        for (int x=0; x<nums.length; x++)
+        {
+            model.addElement(nums[x]);
+        }
+    }//GEN-LAST:event_btnbubbleActionPerformed
+
+    private void btnselectionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnselectionActionPerformed
+        // TODO add your handling code here:
+         model.clear();
+        selectionSort(nums);
+        for (int x=0; x<nums.length; x++)
+        {
+            model.addElement(nums[x]);
+        }
+                  
+    }//GEN-LAST:event_btnselectionActionPerformed
+
+    private void btninsertionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btninsertionActionPerformed
+        // TODO add your handling code here:
+          model.clear();
+        insertionSort(nums);
+        for (int x=0; x<nums.length; x++)
+        {
+            model.addElement(nums[x]);
+        }
+          
+    }//GEN-LAST:event_btninsertionActionPerformed
+public static void insertionSort(int a[]){
+	int itemToInsert, j;
+	boolean stillLooking;
+
+	//on the kth pass, pass item k upwards in list
+	//and insert it in its proper place amoung the
+	//first k entries in an array
+
+	for (int k=1; k<a.length; k++){
+	//move backwards through list, looking for
+	//the right place to insert a[k];
+		itemToInsert = a[k];
+		j=k-1;
+		stillLooking=true;
+		while(j >=0 && stillLooking){
+			if (itemToInsert < a[j]){
+				//move item higher
+				a[j+1] = a[j];
+				j--;
+			}else{
+				//we have found new home for a[k];
+				stillLooking=false;
+			}//end else// j+1 is where the item goes
+			a[j+1]=itemToInsert;
+		}//end while
+  	}//end for
+}//end method
     /**
      * @param args the command line arguments
      */
