@@ -1,3 +1,7 @@
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -13,8 +17,27 @@ public class SearchApp extends javax.swing.JFrame {
     /**
      * Creates new form SearchApp
      */
+      ISSStudent s[] = new ISSStudent[100];
+
+      
+
     public SearchApp() {
         initComponents();
+         initComponents();
+        try {
+            FileReader fr = new FileReader("studata.txt");
+            BufferedReader br = new BufferedReader(fr);
+            String nm, ad;
+            int id;
+            for (int x = 0; x < 100; x++) {
+                nm = br.readLine();
+                ad = br.readLine();
+                id = Integer.parseInt(br.readLine());
+                s[x] = new ISSStudent(nm, ad, id);
+                System.out.println(s[x]);
+            }
+        } catch (Exception e) {System.out.println(e.toString());
+        }
     }
 
     /**
@@ -44,8 +67,18 @@ public class SearchApp extends javax.swing.JFrame {
         });
 
         btnsearch.setText("Search");
+        btnsearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnsearchActionPerformed(evt);
+            }
+        });
 
         btnclear.setText("Clear");
+        btnclear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnclearActionPerformed(evt);
+            }
+        });
 
         txtresult.setColumns(20);
         txtresult.setRows(5);
@@ -99,6 +132,42 @@ public class SearchApp extends javax.swing.JFrame {
     private void txtidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtidActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtidActionPerformed
+
+    private void btnsearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsearchActionPerformed
+        // TODO add your handling code here:
+         ISSStudent temp;
+        int id = Integer.parseInt(txtid.getText());
+        temp = new ISSStudent("", "", id);
+        int location = search(s, temp);
+        if (location == -1) {
+            txtresult.setText("Student not found.");
+        } else {
+            txtresult.setText(s[location].toString());
+        }
+    }//GEN-LAST:event_btnsearchActionPerformed
+
+    private void btnclearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnclearActionPerformed
+        // TODO add your handling code here:
+         txtid.setText("");
+        txtresult.setText("");
+    }//GEN-LAST:event_btnclearActionPerformed
+ public static int search(Object[] a, Object searchValue) {
+        int left = 0;
+        int right = a.length - 1;
+        while (left <= right) {
+            int midpoint = (left + right) / 2;
+            int result = ((ISSStudent) a[midpoint]).compareTo(searchValue);
+            if (result == 0) {
+                return midpoint;
+            } else if (result < 0) {
+                left = midpoint + 1;
+            } else {
+                right = midpoint - 1;
+            }
+        }
+        return -1;
+
+    }
 
     /**
      * @param args the command line arguments
