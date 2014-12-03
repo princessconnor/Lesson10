@@ -177,10 +177,14 @@ public static int findMinimum(int[] a, int first){
     private void btnbubbleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbubbleActionPerformed
         // TODO add your handling code here:
         model.clear();
-        long stime = System.nanoTime();
+        double stime = System.currentTimeMillis();
+        
+        
         bubbleSort(nums);
-        long etime = System.nanoTime() -stime/100000;
-        JOptionPane.showMessageDialog(this, "time it took" + etime);
+        double etime = System.currentTimeMillis()-stime;
+        
+       
+        JOptionPane.showMessageDialog(this, "time it took" + etime/1000);
         for (int x=0; x<nums.length; x++)
         {
             model.addElement(nums[x]);
@@ -190,7 +194,10 @@ public static int findMinimum(int[] a, int first){
     private void btnselectionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnselectionActionPerformed
         // TODO add your handling code here:
          model.clear();
+          double stime = System.currentTimeMillis();
         selectionSort(nums);
+         double etime = System.currentTimeMillis()-stime;
+          JOptionPane.showMessageDialog(this, "time it took: " + etime/1000);
         for (int x=0; x<nums.length; x++)
         {
             model.addElement(nums[x]);
@@ -201,7 +208,10 @@ public static int findMinimum(int[] a, int first){
     private void btninsertionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btninsertionActionPerformed
         // TODO add your handling code here:
           model.clear();
+          double stime = System.currentTimeMillis();
         insertionSort(nums);
+         double etime = System.currentTimeMillis()-stime;
+          JOptionPane.showMessageDialog(this, "time it took" + etime/1000);
         for (int x=0; x<nums.length; x++)
         {
             model.addElement(nums[x]);
