@@ -26,6 +26,13 @@ public class PeopleList {
            p = (Person) people.get(x);
            System.out.println(p);
        }
+       //remove bobby boi
+       people.remove(1);
+        for (int x=0; x<people.size(); x++)
+       {
+           p = (Person) people.get(x);
+           System.out.println(p);
+       }
        
     }
     
