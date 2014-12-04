@@ -1,7 +1,7 @@
 
-import static Fruitlist.logicalSize;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -36,22 +36,22 @@ DefaultListModel  model = new DefaultListModel();
    
     
     }
-public static int findInsertPoint (ArrayList a[], Object searchValue){
+public static int findInsertPoint (ArrayList a, Object searchValue){
 	   int left = 0;
 	   int right = a.size()-1;
 	   int midpoint=0;
 	   Object item = null;
 	   while (left <= right){
 	      midpoint = (left + right) / 2;
-	   
-	      int result = ((Comparable)a[midpoint]).compareTo(searchValue); 
+	   item = a.get(midpoint);
+	      int result = ((Comparable)item).compareTo(searchValue); 
 	   
 	     if (result < 0)
 	         left = midpoint + 1;
 	      else
 	         right = midpoint-1;
 	   }
-	   if(((Comparable)a[midpoint]).compareTo(searchValue) < 0)
+	   if(((Comparable)item).compareTo(searchValue) < 0)
 	   midpoint++;
 	   return midpoint;	   
 }
@@ -81,6 +81,11 @@ public static int findInsertPoint (ArrayList a[], Object searchValue){
         });
 
         btnremove.setText("REMOVE");
+        btnremove.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnremoveActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -113,8 +118,19 @@ public static int findInsertPoint (ArrayList a[], Object searchValue){
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnaddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnaddActionPerformed
-      
+      String f = JOptionPane.showInputDialog(this, "Enter New Fruiit");
+      int loc = findInsertPoint(fruit, f );
+      fruit.add(loc, f );
+      model.add(loc, f );
     }//GEN-LAST:event_btnaddActionPerformed
+
+    private void btnremoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnremoveActionPerformed
+        //which is selected in this 
+     int loc =   lstfruit.getSelectedIndex();
+     fruit.remove(loc);
+     model.remove(loc);
+     
+    }//GEN-LAST:event_btnremoveActionPerformed
 
     /**
      * @param args the command line arguments
