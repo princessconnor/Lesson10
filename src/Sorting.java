@@ -252,18 +252,7 @@ public static void insertionSort(int a[]){
 		}//end while
   	}//end for
 }//end method
-private void btnquickActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnrecursiveActionPerformed
-        model.clear();
-        double stime=System.currentTimeMillis();
-        quickSort(nums,0,49999);
-        double etime=System.currentTimeMillis()-stime;
-        JOptionPane.showMessageDialog(this,"Time it took: "+etime/1000);
-        for(int x=0; x<nums.length;x++)
-        {
-            model.addElement(nums[x]);
-        }
-    }
- void quickSort(int[] a,int left, int right)
+void quickSort(int[] a,int left, int right)
  {
     if(left>=right)return;
     int i=left;
@@ -283,6 +272,18 @@ private void btnquickActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     quickSort(a,left,j);
     quickSort(a,i,right);
 }
+private void btnquickActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnrecursiveActionPerformed
+        model.clear();
+        double stime=System.currentTimeMillis();
+        quickSort(nums,0,49999);
+        double etime=System.currentTimeMillis()-stime;
+        JOptionPane.showMessageDialog(this,"Time it took: "+etime/1000);
+        for(int x=0; x<nums.length;x++)
+        {
+            model.addElement(nums[x]);
+        }
+    }
+ 
     /**
      * @param args the command line arguments
      */
